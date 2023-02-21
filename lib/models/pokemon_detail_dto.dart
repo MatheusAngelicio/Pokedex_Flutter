@@ -3,13 +3,15 @@ class PokemonDetail {
   int? id;
   String? name;
   List<Types>? types;
+  Species? species;
 
-  PokemonDetail(this.sprites, this.id, this.types, this.name);
+  PokemonDetail(this.sprites, this.id, this.types, this.name, this.species);
 
   PokemonDetail.fromJson(Map<dynamic, dynamic> json) {
     sprites = json['sprites'] != null ? new Sprites.fromJson(json['sprites']) : null;
     id = json['id'];
     name = json['name'];
+    species = json['species'] != null ? new Species.fromJson(json['species']) : null;
     if (json['types'] != null) {
       types = <Types>[];
       json['types'].forEach((v) {
@@ -23,6 +25,7 @@ class PokemonDetail {
     data['sprites'] = this.sprites;
     data['id'] = this.id;
     data['name'] = this.name;
+    data['species'] = this.species;
     if (this.types != null) {
       data['types'] = this.types!.map((v) => v.toJson()).toList();
     }
@@ -31,7 +34,7 @@ class PokemonDetail {
 
   @override
   String toString() {
-    return 'PokemonDetail{id: $id, types: $types, sprites: $sprites, name: $name}';
+    return 'PokemonDetail{id: $id, types: $types, sprites: $sprites, name: $name, species: $species}';
   }
 }
 
@@ -106,5 +109,30 @@ class Ability {
   @override
   String toString() {
     return 'Ability{name: $name, url: $url}';
+  }
+}
+
+class Species {
+  String? name;
+
+  @override
+  String toString() {
+    return 'Species{name: $name, url: $url}';
+  }
+
+  String? url;
+
+  Species({this.name, this.url});
+
+  Species.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    url = json['url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['name'] = this.name;
+    data['url'] = this.url;
+    return data;
   }
 }
