@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:pokedexflutter/api_response.dart';
+import 'package:pokedexflutter/models/pokemon_species.dart';
 import 'dart:convert' as convert;
 
 import 'models/pokemon_detail_dto.dart';
@@ -51,4 +52,30 @@ class PokemonApi {
     }
   }
 
-}
+  static Future<ApiResponse<PokemonSpecies>> getPokemonSpeciesInfo(String id) async {
+
+    try {
+      var url = Uri.parse('https://pokeapi.co/api/v2/pokemon-species/$id/');
+      var response = await http.get(url);
+
+      Map mapResponse = json.decode(response.body);
+
+      if (response.statusCode == 200) {
+        final species = PokemonSpecies.fromJson(mapResponse);
+
+        return ApiResponse.ok(species);
+      } else {
+        return ApiResponse.error(mapResponse["error"]);
+      }
+
+    } catch (error, exception) {
+      print("Erro ao obter especie do pokemon $error > $exception");
+
+      return ApiResponse.error("Não foi possível obter a especie do pokemon");
+    }
+
+  }
+
+
+
+  }
