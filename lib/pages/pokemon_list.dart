@@ -18,7 +18,6 @@ class _PokemonListState extends State<PokemonList> {
   final _streamController = StreamController<List<PokemonDetail>>();
   List<PokemonDetail> detailList = [];
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(appBar: AppBar(title: Text("Pokemons")), body: _body());
@@ -41,17 +40,14 @@ class _PokemonListState extends State<PokemonList> {
       Future.wait(pokemonList.map((pokemon) async {
         ApiResponse response2 = await PokemonApi.getDetail(pokemon.name ?? "");
 
-        if(response2.ok) {
-
+        if (response2.ok) {
           PokemonDetail detail = response2.result;
           detailList.add(detail);
 
           _streamController.add(detailList);
           print("ok detail >>> $detail");
-
         } else {
           print("erro detail >>> $response");
-
         }
       }));
 
@@ -105,7 +101,20 @@ class _PokemonListState extends State<PokemonList> {
 
             return Card(
               color: Colors.grey[100],
-              child: Text(pokemon.id.toString() ?? ""),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    children: [
+                      Text(pokemon.id.toString() ?? ""),
+                      Text(pokemon.name ?? ""),
+                    ],
+                  ),
+                  Expanded(
+                    child: Image.network(pokemon.sprites?.front_default ?? ""),
+                  ),
+                ],
+              ),
             );
           },
         ));
