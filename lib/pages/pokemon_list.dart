@@ -6,6 +6,8 @@ import 'package:pokedexflutter/models/pokemon_detail_dto.dart';
 import 'package:pokedexflutter/models/pokemon_dto.dart';
 
 import '../pokemon_api.dart';
+import '../utils/nav.dart';
+import 'pokemon_details_page.dart';
 
 class PokemonList extends StatefulWidget {
   const PokemonList({Key? key}) : super(key: key);
@@ -101,22 +103,32 @@ class _PokemonListState extends State<PokemonList> {
 
             return Card(
               color: Colors.grey[100],
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    children: [
-                      Text(pokemon.id.toString() ?? ""),
-                      Text(pokemon.name ?? ""),
-                    ],
-                  ),
-                  Expanded(
-                    child: Image.network(pokemon.sprites?.front_default ?? ""),
-                  ),
-                ],
+              child: GestureDetector(
+                onTap: (){
+                  onClickPokemon(pokemon);
+              },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      children: [
+                        Text(pokemon.id.toString() ?? ""),
+                        Text(pokemon.name ?? ""),
+                      ],
+                    ),
+                    Expanded(
+                      child: Image.network(
+                          pokemon.sprites?.front_default ?? ""),
+                    ),
+                  ],
+                ),
               ),
             );
           },
         ));
+  }
+
+  onClickPokemon(PokemonDetail pokemon) {
+    push(context, PokemonDetailsPage(pokemon));
   }
 }
