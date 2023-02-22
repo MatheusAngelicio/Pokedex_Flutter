@@ -72,21 +72,47 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage> {
                     fontWeight: FontWeight.bold),
               ),
               Text("Nº${widget.pokemon.id}"),
-              FutureBuilder<String?>(
-                future: _getPokemonSpecies(),
-                builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    if (snapshot.hasData && snapshot.data != null) {
-                      return Text(snapshot.data ?? "");
+              Container(
+                margin:
+                    EdgeInsets.only(left: 0, top: 16.0, right: 0, bottom: 0),
+                child: FutureBuilder<String?>(
+                  future: _getPokemonSpecies(),
+                  builder:
+                      (BuildContext context, AsyncSnapshot<String?> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      if (snapshot.hasData && snapshot.data != null) {
+                        return Text(snapshot.data ?? "");
+                      } else {
+                        return Text(
+                            "Erro ao obter informações da espécie do Pokémon.");
+                      }
                     } else {
-                      return Text(
-                          "Erro ao obter informações da espécie do Pokémon.");
+                      return CircularProgressIndicator();
                     }
-                  } else {
-                    return CircularProgressIndicator();
-                  }
-                },
+                  },
+                ),
               ),
+              Container(
+                margin:
+                    EdgeInsets.only(left: 0, top: 32.0, right: 0, bottom: 0),
+                height: 1,
+                color: Color(0x5931323B),
+              ),
+              Container(
+                margin:
+                    EdgeInsets.only(left: 0, top: 32.0, right: 0, bottom: 0),
+                child: Row(
+                  children: [
+                    Image.asset(
+                      'assets/images/peso.png',
+                      width: 15,
+                      height: 15,
+                      fit: BoxFit.cover,
+                    ),
+                    Text("PESO"),
+                  ],
+                ),
+              )
             ],
           )
         ],
