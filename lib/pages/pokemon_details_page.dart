@@ -99,7 +99,7 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage> {
               ),
               Container(
                 margin:
-                    EdgeInsets.only(left: 0, top: 32.0, right: 0, bottom: 0),
+                    EdgeInsets.only(left: 0, top: 32.0, right: 16, bottom: 16),
                 child: Row(
                   children: [
                     Image.asset(
@@ -113,7 +113,7 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage> {
                 ),
               ),
               Container(
-                width: double.infinity,
+                width: 175,
                 height: 43,
                 decoration: BoxDecoration(
                   border: Border.all(color: Color(0x19000000)),
@@ -121,7 +121,7 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage> {
                 ),
                 child: Center(
                   child: Text(
-                    widget.pokemon.weight.toString(),
+                    "${widget.pokemon.weight} kg",
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
