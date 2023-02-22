@@ -4,8 +4,10 @@ class PokemonDetail {
   String? name;
   List<Types>? types;
   Species? species;
+  int? height;
+  int? weight;
 
-  PokemonDetail(this.sprites, this.id, this.types, this.name, this.species);
+  PokemonDetail(this.sprites, this.id, this.types, this.name, this.species, this.height, this.weight);
 
   PokemonDetail.fromJson(Map<dynamic, dynamic> json) {
     sprites = json['sprites'] != null ? new Sprites.fromJson(json['sprites']) : null;
@@ -18,6 +20,8 @@ class PokemonDetail {
         types!.add(new Types.fromJson(v));
       });
     }
+    height = json['height'];
+    weight = json['weight'];
   }
 
   Map<String, dynamic> toJson() {
@@ -29,12 +33,14 @@ class PokemonDetail {
     if (this.types != null) {
       data['types'] = this.types!.map((v) => v.toJson()).toList();
     }
+    data['height'] = this.height;
+    data['weight'] = this.weight;
     return data;
   }
 
   @override
   String toString() {
-    return 'PokemonDetail{id: $id, types: $types, sprites: $sprites, name: $name, species: $species}';
+    return 'PokemonDetail{id: $id, types: $types, sprites: $sprites, name: $name, species: $species, height: $height, weight: $weight}';
   }
 }
 

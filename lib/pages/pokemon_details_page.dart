@@ -43,7 +43,6 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: Text(widget.pokemon.name ?? ""),
       ),
       body: _body(),
     );
@@ -112,7 +111,26 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage> {
                     Text("PESO"),
                   ],
                 ),
-              )
+              ),
+              Container(
+                width: double.infinity,
+                height: 43,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Color(0x19000000)),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Center(
+                  child: Text(
+                    widget.pokemon.weight.toString(),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                      height: 1.5,
+                      color: Color(0xe5000000),
+                    ),
+                  ),
+                ),
+              ),
             ],
           )
         ],
